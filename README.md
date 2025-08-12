@@ -30,3 +30,36 @@ This project implements an end-to-end deep learning pipeline to recognize 30+ In
    Run the preprocessing script to clean and augment the dataset to improve model generalization.
    ```bash
    python scripts/preprocess_data.py --input data/raw --output data/processed
+
+2. **Training:**  
+   Train models using transfer learning with the command:  
+   `python scripts/train_model.py --model xception --epochs 50`
+
+3. **Evaluation:**  
+   Evaluate trained models on validation data:  
+   `python scripts/evaluate.py --model models/xception.h5 --data data/processed/val`
+
+4. **Inference:**  
+   Use the scalable inference pipeline with Spark/Hive:  
+   `spark-submit inference_pipeline/inference_spark.py --model models/xception.h5 --input data/test`
+
+## Results
+
+| Model               | Training Accuracy | Validation Accuracy |
+|---------------------|-------------------|---------------------|
+| Xception            | 95%               | 73%                 |
+| InceptionV3         | 93%               | 70%                 |
+| MobileNet           | 90%               | 68%                 |
+| VGG16               | 89%               | 66%                 |
+| Inception+Xception  | 96%               | 74%                 |
+
+## Future Work
+
+- Improve validation accuracy by collecting more diverse ISL samples.
+- Deploy a real-time mobile app using the trained model.
+- Extend gesture vocabulary beyond 30 signs.
+
+## Author
+
+**Shahaan Kaushik**
+
